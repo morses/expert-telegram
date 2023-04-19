@@ -19,3 +19,5 @@ filename = sys.argv[3]
 
 # Save the image to a file with the specified filename
 image.save(filename)
+
+print("Success...")

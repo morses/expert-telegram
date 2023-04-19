@@ -62,8 +62,11 @@ jobs:
         with:
           python-version: '3.10' 
       - run: pwd
+      - run: |
+          which python
+          which python3
       - run: pip install Pillow
-      - run: python3 my_script.py 400 300 out.png
+      - run: python my_script.py 400 300 out.png
       - name: Publish Artifacts
         uses: actions/upload-artifact@v3
         with:
