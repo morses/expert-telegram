@@ -16,7 +16,7 @@ on:
 env:
   PATH_TO_PROJECT: './myproject/src'
   MY_NAME: Scot
-  VERSION: ${{ 5 }}
+  VERSION: 5 
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -50,4 +50,23 @@ jobs:
         if: success() && ${{ env.VERSION }} > 4
         run: echo Version is OK
 
+  run_script_file:
+    name: Run a Python script that is in our repo
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: $PATH_TO_PROJECT
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10' 
+      - run: |
+          pip install Pillow
+          python my_script.py 400 300 out.png
+      - name: Publish Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: placeholder_image
+          path: out.png
 
