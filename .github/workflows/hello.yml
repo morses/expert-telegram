@@ -47,7 +47,7 @@ jobs:
         run: echo "name $MY_NAME, path $PATH_TO_PROJECT"
 
       - name: Run only if version is OK and previous step succeeded
-        if: success() && $VERSION > 4
+        if: success() && ${{ env.VERSION }} > 4
         run: echo Version is OK
 
 
