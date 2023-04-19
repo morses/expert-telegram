@@ -12,6 +12,11 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+  
+env:
+  PATH_TO_PROJECT: './myproject/src'
+  MY_NAME: Scot
+  VERSION: ${{ 5 }}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -36,3 +41,13 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+      
+      # Access an environment variable set at the workspace scope in this file
+      - name: Access an env variable
+        run: echo "name $MY_NAME, path $PATH_TO_PROJECT"
+
+      - name: Run only if version is OK and previous step succeeded
+        if: success() && $VERSION > 4
+        run: echo Version is OK
+
+
